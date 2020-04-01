@@ -63,7 +63,6 @@
     "@types/shortid": "0.0.29",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
     "@typescript-eslint/parser": "^2.3.3",
-    "cypress": "^4.0.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.5.1",
