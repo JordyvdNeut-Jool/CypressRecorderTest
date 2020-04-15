@@ -29,7 +29,7 @@ export default () => {
       readTest().then(result => {
         result.forEach(element => {
           element.forEach(fileName => {
-            var fileNameRow = "<button>" + fileName + "</button>";
+            var fileNameRow = fileName;
             document.getElementById("test").innerHTML += fileNameRow;
           });
         });
