@@ -1,7 +1,7 @@
 import * as React from "react";
 import Header from "./Header";
 import Info from "./Info";
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Body from "./Body";
 import { RecState, Block, ActionWithPayload } from "../../types";

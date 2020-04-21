@@ -29,20 +29,11 @@ export default () => {
       readTest().then(result => {
         result.forEach(element => {
           element.forEach(fileName => {
-            var fileNameRow = "<button onClick={handleClick}>" + fileName + "</button>";
+            var fileNameRow = "<button>" + fileName + "</button>";
             document.getElementById("test").innerHTML += fileNameRow;
           });
         });
       });
-  };
-
-  const handleClick = () => {
-    // try {
-      var codeRow = "<textarea>Text</textarea>";
-      document.getElementById("code").innerHTML += codeRow;
-          // } catch (error) {
-      // throw new Error(error);
-    // }
   };
 
   return (
@@ -50,7 +41,6 @@ export default () => {
       <h1>Templates</h1>
       {pushTemplateName()}
       <div id="test"></div>
-      <div id="code"></div>
       <br />
     </div>
   );
