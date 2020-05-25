@@ -9,8 +9,6 @@ import { ControlAction } from "../../constants";
 import "../../assets/styles/styles.scss";
 import Templates from "./Templates";
 
-const chr = chrome.extension.getBackgroundPage();
-
 export default () => {
   const [recStatus, setRecStatus] = React.useState<RecState>("off");
   const [codeBlocks, setCodeBlocks] = React.useState<Block[]>([]);
@@ -116,35 +114,6 @@ export default () => {
     nodeServerPost("saveTest", options);
   };
 
-  const readTest = async (): Promise<any[]> => {
-    chr.console.log("readTest");
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8"
-      }
-    };
-    var response = nodeServerPost("readTests", options);
-
-    var fileName = response.then(result => {
-      let values = Object.values(result);
-      return values;
-    });
-    return fileName;
-  };
-  const pushTemplateName = () => {
-    chr.console.log("pushTemp");
-    readTest().then(result => {
-      result.forEach(element => {
-        chr.console.log(element);
-        element.forEach(fileName => {
-          document.getElementById("test").innerHTML += fileName;
-          chr.console.log(fileName);
-        });
-      });
-    });
-  };
-
   const openRunner = async (): Promise<void> => {
     const options = {
       method: "POST",
@@ -237,7 +206,6 @@ export default () => {
         recStatus={recStatus}
         handleToggle={handleToggle}
         openRunner={openRunner}
-        readTest={readTest}
         copyToClipboard={copyToClipboard}
       />
     </div>

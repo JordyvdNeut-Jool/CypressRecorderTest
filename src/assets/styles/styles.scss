@@ -181,6 +181,29 @@ li {
   }
 }
 
+div.template {
+  display: flex;
+  justify-content: space-between;
+  width: 98.5%;
+  border: 1px solid gainsboro;
+  border-radius: 2px;
+  padding: 5px;
+
+  & button {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s linear 0s, opacity 300ms;
+  }
+
+  &:hover {
+    & button {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s linear 0s, opacity 300ms;
+    }
+  }
+}
+
 li.drag-origin {
   background-color: gainsboro;
 
@@ -261,4 +284,17 @@ mark {
   color: $pale-green;
   font-size: 14px;
   margin-left: 10px;
+}
+
+.recentTestButton {
+  display: inline-flex;
+}
+
+.saveTestInput {
+  display: flex;
+  justify-content: space-between;
+  width: 98.5%;
+  border: 1px solid gainsboro;
+  border-radius: 2px;
+  padding: 5px;
 }
