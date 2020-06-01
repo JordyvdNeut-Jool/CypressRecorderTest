@@ -86,11 +86,15 @@ export default () => {
 
   const saveTest = async (): Promise<void> => {
     const inputName = document.getElementById("name") as HTMLInputElement;
-    var name = inputName.value;
     const inputDescription = document.getElementById(
       "description"
     ) as HTMLInputElement;
+    const inputLocation = document.getElementById(
+      "location"
+    ) as HTMLInputElement;
+    var name = inputName.value;
     var description = inputDescription.value;
+    var location = inputLocation.value;
 
     let toBeSaved: string = "";
     for (let i = 0; i !== codeBlocks.length; i += 1) {
@@ -98,18 +102,18 @@ export default () => {
     }
     chrome.storage.local.set(
       { name: name, description: description, code: toBeSaved },
-      function() {
-        alert("Success!");
+      function () {
+        alert("saved successfully!");
       }
     );
     let code = toBeSaved;
-    const datas = { name, description, code };
+    const datas = { name, description, location, code };
     const options = {
       method: "POST",
       headers: {
-        "Content-type": "application/json; charset=utf-8"
+        "Content-type": "application/json; charset=utf-8",
       },
-      body: JSON.stringify(datas)
+      body: JSON.stringify(datas),
     };
     nodeServerPost("saveTest", options);
   };
@@ -118,8 +122,8 @@ export default () => {
     const options = {
       method: "POST",
       headers: {
-        "Content-type": "application/json; charset=utf-8"
-      }
+        "Content-type": "application/json; charset=utf-8",
+      },
     };
     nodeServerPost("openRunner", options);
   };
