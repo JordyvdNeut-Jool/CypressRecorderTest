@@ -1,5 +1,5 @@
-import * as React from 'react';
-import SaveTestButton from './SaveTestButton';
+import * as React from "react";
+import SaveTestButton from "./SaveTestButton";
 import RunTestButton from "./RunTestButton";
 
 export interface SidebarProps {
@@ -7,6 +7,9 @@ export interface SidebarProps {
   saveTest: () => Promise<void>;
   runLastRecordedTest: () => Promise<void>;
 }
+
+var path = "./cypress/integration/examples/";
+
 export default ({ recStatus, saveTest, runLastRecordedTest }: SidebarProps) => (
   <div id="sidebar">
     <h1>Save test</h1>
@@ -23,6 +26,19 @@ export default ({ recStatus, saveTest, runLastRecordedTest }: SidebarProps) => (
       className="saveTestInput"
       id="description"
       name="description"
+      required
+    />
+    <label>Location</label>
+    <p>
+      This is set to the node server and save it there you can change it to your
+      desired directory
+    </p>
+    <input
+      type="text"
+      className="saveTestInput"
+      id="location"
+      name="location"
+      defaultValue={path}
       required
     />
     <div className="recentTestButton">
