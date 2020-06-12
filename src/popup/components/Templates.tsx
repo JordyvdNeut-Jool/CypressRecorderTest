@@ -1,46 +1,41 @@
 import * as React from "react";
-
-const chr = chrome.extension.getBackgroundPage();
+import { useEffect } from "react";
+import TemplateBlock from "./TemplateBlock";
 
 export default () => {
-
   const nodeServerPost = async (link, options) => {
     const response = await fetch("http://localhost:3000/" + link, options);
     const jsonResponse = await response.json();
     return jsonResponse;
   };
 
-  const readTest = async (): Promise<any[]> => {
+  const readTests = async () => {
     const options = {
-      method: "POST",
+      method: "GET",
       headers: {
-        "Content-type": "application/json; charset=utf-8"
-      }
+        "Content-type": "application/json; charset=utf-8",
+      },
     };
     var response = nodeServerPost("readTests", options);
-
-    var fileName = response.then(result => {
-      let values = Object.values(result);
-      return values;
+    var results = response.then((result) => {
+      return Object.values(result);
     });
-    return fileName;
+    return results;
   };
-  const pushTemplateName = () => {
-      readTest().then(result => {
-        result.forEach(element => {
-          element.forEach(fileName => {
-            var fileNameRow = "<button>" + fileName + "</button>";
-            document.getElementById("test").innerHTML += fileNameRow;
-          });
-        });
+
+  const templateNames = async() => await readTests().then((result) => {
+    result.map((files: any[]) => {
+      files.map((templateName: string) => {
+        <TemplateBlock name={templateName}/>
       });
-  };
+    });
+  });
 
   return (
     <div id="templatesbox">
       <h1>Templates</h1>
-      {pushTemplateName()}
-      <div id="test"></div>
+      <TemplateBlock name={'RecentTest'} />
+      {/* {templateNames} */}
       <br />
     </div>
   );

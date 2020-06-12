@@ -279,6 +279,33 @@ li:hover button {
   transition: visibility 0s linear 0s, opacity 300ms;
 }
 
+div.template {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 98.5%;
+  border: 1px solid gainsboro;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+div.template button {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s linear 0s, opacity 300ms;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+div.template:hover button {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s linear 0s, opacity 300ms;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
 li.drag-origin {
   background-color: gainsboro;
 }
@@ -362,5 +389,24 @@ mark {
   color: #f8fbf9;
   font-size: 14px;
   margin-left: 10px;
+}
+
+.recentTestButton {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.saveTestInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 98.5%;
+  border: 1px solid gainsboro;
+  border-radius: 2px;
+  padding: 5px;
 }
 /*# sourceMappingURL=styles.css.map */

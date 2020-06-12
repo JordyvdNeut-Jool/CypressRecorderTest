@@ -9,8 +9,6 @@ import { ControlAction } from "../../constants";
 import "../../assets/styles/styles.scss";
 import Templates from "./Templates";
 
-const chr = chrome.extension.getBackgroundPage();
-
 export default () => {
   const [recStatus, setRecStatus] = React.useState<RecState>("off");
   const [codeBlocks, setCodeBlocks] = React.useState<Block[]>([]);
@@ -88,11 +86,15 @@ export default () => {
 
   const saveTest = async (): Promise<void> => {
     const inputName = document.getElementById("name") as HTMLInputElement;
-    var name = inputName.value;
     const inputDescription = document.getElementById(
       "description"
     ) as HTMLInputElement;
+    const inputLocation = document.getElementById(
+      "location"
+    ) as HTMLInputElement;
+    var name = inputName.value;
     var description = inputDescription.value;
+    var location = inputLocation.value;
 
     let toBeSaved: string = "";
     for (let i = 0; i !== codeBlocks.length; i += 1) {
@@ -100,57 +102,28 @@ export default () => {
     }
     chrome.storage.local.set(
       { name: name, description: description, code: toBeSaved },
-      function() {
-        alert("Success!");
+      function () {
+        alert("saved successfully!");
       }
     );
     let code = toBeSaved;
-    const datas = { name, description, code };
+    const datas = { name, description, location, code };
     const options = {
       method: "POST",
       headers: {
-        "Content-type": "application/json; charset=utf-8"
+        "Content-type": "application/json; charset=utf-8",
       },
-      body: JSON.stringify(datas)
+      body: JSON.stringify(datas),
     };
     nodeServerPost("saveTest", options);
-  };
-
-  const readTest = async (): Promise<any[]> => {
-    chr.console.log("readTest");
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8"
-      }
-    };
-    var response = nodeServerPost("readTests", options);
-
-    var fileName = response.then(result => {
-      let values = Object.values(result);
-      return values;
-    });
-    return fileName;
-  };
-  const pushTemplateName = () => {
-    chr.console.log("pushTemp");
-    readTest().then(result => {
-      result.forEach(element => {
-        chr.console.log(element);
-        element.forEach(fileName => {
-          document.getElementById("test").innerHTML += fileName;
-          chr.console.log(fileName);
-        });
-      });
-    });
   };
 
   const openRunner = async (): Promise<void> => {
     const options = {
       method: "POST",
       headers: {
-        "Content-type": "application/json; charset=utf-8"
-      }
+        "Content-type": "application/json; charset=utf-8",
+      },
     };
     nodeServerPost("openRunner", options);
   };
@@ -237,7 +210,6 @@ export default () => {
         recStatus={recStatus}
         handleToggle={handleToggle}
         openRunner={openRunner}
-        readTest={readTest}
         copyToClipboard={copyToClipboard}
       />
     </div>
